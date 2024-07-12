@@ -1,4 +1,4 @@
-const CustomErr = require("../errors");
+const CustomError = require("../errors");
 const { isTokenValid } = require("../utils");
 
 const authenticateUser = async (req, res, next) => {
@@ -12,8 +12,19 @@ const authenticateUser = async (req, res, next) => {
     req.user = { name, userId, email, role };
     return next();
   } catch (error) {
-    throw new CustomErr.UnauthenticatedError("Authentication invalid");
+    throw new CustomError.UnauthenticatedError("Authentication invalid");
   }
 };
 
-module.exports = { authenticateUser };
+const authorizePermissions = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      throw new CustomError.UnauthorizedError(
+        "Unauthorized to access this route"
+      );
+    }
+    return next();
+  };
+};
+
+module.exports = { authenticateUser, authorizePermissions };
