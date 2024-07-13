@@ -1,6 +1,7 @@
 const Product = require("../models/Product");
 const { StatusCodes } = require("http-status-codes");
 const CustomError = require("../errors");
+const path = require("path");
 
 const createProduct = async (req, res) => {
   req.body.userId = req.user.userId;
@@ -41,7 +42,27 @@ const deleteProduct = async (req, res) => {
   res.status(StatusCodes.OK).json({ msg: "Success! Product removed." });
 };
 const uploadImage = async (req, res) => {
-  res.send("upload image");
+  if (!req.files) {
+    throw new CustomError.BadRequestError("Please upload a file");
+  }
+  const productImage = req.files.image;
+  if (!productImage.mimetype.startsWith("image")) {
+    throw new CustomError.BadRequestError("Please upload an image file");
+  }
+  const maxSize = 1024 * 1024;
+  if (productImage.size > maxSize) {
+    throw new CustomError.BadRequestError(
+      "Please upload an image less than 1MB"
+    );
+  }
+  console.log(__dirname);
+  const imagePath = path.join(
+    __dirname,
+    "../public/uploads/",
+    productImage.name
+  );
+  await productImage.mv(imagePath);
+  res.status(StatusCodes.OK).json({ image: `/uploads/${productImage.name}` });
 };
 
 module.exports = {
