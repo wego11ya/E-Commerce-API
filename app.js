@@ -12,6 +12,12 @@ const cookieParser = require("cookie-parser");
 
 const fileUpload = require("express-fileupload");
 
+// extra security packages
+const rateLimit = require("express-rate-limit");
+const helmet = require("helmet");
+const cors = require("cors");
+const mongoSanitize = require("express-mongo-sanitize");
+const { xss } = require("express-xss-sanitizer");
 // database connection
 const connectDB = require("./db/connect");
 
@@ -25,6 +31,14 @@ const orderRouter = require("./routes/orderRoutes");
 // middleware
 const notFoundMiddleware = require("./middleware/not-found");
 const errorHandlerMiddleware = require("./middleware/error-handler");
+
+// security middleware
+app.set("trust proxy", 1);
+app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 60 }));
+app.use(helmet());
+app.use(xss());
+app.use(mongoSanitize());
+app.use(cors());
 
 app.use(morgan("tiny"));
 app.use(express.json());
