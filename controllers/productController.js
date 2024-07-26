@@ -1,7 +1,9 @@
 const Product = require("../models/Product");
 const { StatusCodes } = require("http-status-codes");
 const CustomError = require("../errors");
+const cloudinary = require("cloudinary").v2;
 const path = require("path");
+const fs = require("fs");
 
 const createProduct = async (req, res) => {
   req.body.userId = req.user.userId;
@@ -42,7 +44,7 @@ const deleteProduct = async (req, res) => {
   await product.deleteOne();
   res.status(StatusCodes.OK).json({ msg: "Success! Product removed." });
 };
-const uploadImage = async (req, res) => {
+const uploadImageLocal = async (req, res) => {
   if (!req.files) {
     throw new CustomError.BadRequestError("Please upload a file");
   }
@@ -65,7 +67,39 @@ const uploadImage = async (req, res) => {
   await productImage.mv(imagePath);
   res.status(StatusCodes.OK).json({ image: `/uploads/${productImage.name}` });
 };
-
+const uploadImage = async (req, res) => {
+  const { id: productId } = req.params;
+  const product = await Product.findOne({ _id: productId });
+  if (!product) {
+    throw new CustomError.NotFoundError(`No product with id : ${productId}`);
+  }
+  if (!req.files) {
+    throw new CustomError.BadRequestError("Please upload a file");
+  }
+  const productImage = req.files.image;
+  if (!productImage.mimetype.startsWith("image")) {
+    throw new CustomError.BadRequestError("Please upload an image file");
+  }
+  const maxSize = 1024 * 1024;
+  if (productImage.size > maxSize) {
+    throw new CustomError.BadRequestError(
+      "Please upload an image less than 1MB"
+    );
+  }
+  const result = await cloudinary.uploader.upload(
+    req.files.image.tempFilePath,
+    {
+      use_filename: true,
+      folder: "file-upload",
+    }
+  );
+  // update the product with the image url
+  product.image = result.secure_url;
+  await product.save();
+  // delete the temp file
+  fs.unlinkSync(req.files.image.tempFilePath);
+  return res.status(StatusCodes.OK).json({ image: { src: result.secure_url } });
+};
 module.exports = {
   createProduct,
   getAllProducts,

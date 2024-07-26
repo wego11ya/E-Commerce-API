@@ -22,15 +22,15 @@ router
   .get(getAllProducts);
 
 router
-  .route("/uploadImage")
-  .post([authenticateUser, authorizePermissions("admin")], uploadImage);
-
-router
   .route("/:id")
   .get(getSingleProduct)
   .patch([authenticateUser, authorizePermissions("admin")], updateProduct)
   .delete([authenticateUser, authorizePermissions("admin")], deleteProduct);
 
 router.route("/:id/reviews").get(getSingleProductReviews);
+
+router
+  .route("/:id/uploadImage")
+  .post([authenticateUser, authorizePermissions("admin")], uploadImage);
 
 module.exports = router;
