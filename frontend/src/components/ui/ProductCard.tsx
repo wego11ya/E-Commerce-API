@@ -4,15 +4,17 @@ import Image from "next/image";
 import { ShoppingCart } from "lucide-react";
 
 interface ProductCardProps {
-  id: string;
+  _id: string;
   name: string;
   price: number;
   description: string;
   image: string;
+  company?: string;
+  category?: string;
 }
 
 export default function ProductCard({
-  id,
+  _id,
   name,
   price,
   description,
@@ -32,7 +34,7 @@ export default function ProductCard({
             className="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition-colors"
             onClick={() => {
               // TODO: Add to cart functionality
-              console.log(`Add product ${id} to cart`);
+              console.log(`Add product ${_id} to cart`);
             }}
           >
             <ShoppingCart className="w-5 h-5" />
