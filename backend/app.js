@@ -42,7 +42,14 @@ const errorHandlerMiddleware = require("./middleware/error-handler");
 app.set("trust proxy", 1);
 app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 60 }));
 app.use(helmet());
-app.use(xss());
+app.use(
+  xss({
+    allowedTags: [],
+    allowedAttributes: {},
+    stripIgnoreTag: true,
+    stripIgnoreTagBody: ["script"],
+  })
+);
 app.use(mongoSanitize());
 app.use(cors());
 
