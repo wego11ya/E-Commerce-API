@@ -1,44 +1,84 @@
 const mongoose = require("mongoose");
+
 const ProductSchema = new mongoose.Schema(
   {
     name: {
       type: String,
       trim: true,
-      required: [true, "Please provide a product name"],
+      required: [true, "Please provide product name"],
       maxLength: [100, "Name cannot be more than 100 characters"],
     },
     price: {
       type: Number,
-      required: [true, "Please provide a product price"],
+      required: [true, "Please provide product price"],
       default: 0,
     },
     description: {
       type: String,
-      required: [true, "Please provide a product description"],
+      required: [true, "Please provide product description"],
       maxLength: [1000, "Description cannot be more than 1000 characters"],
     },
     image: {
       type: String,
-      default: "/uploads/example.jpeg",
+      required: [true, "Please provide product image"],
+    },
+    gender: {
+      type: String,
+      required: [true, "Please provide product gender"],
+      enum: {
+        values: ["Men", "Women", "Kids"],
+        message: "{VALUE} is not a valid gender category",
+      },
     },
     category: {
       type: String,
-      required: [true, "Please provide a product category"],
-      enum: ["office", "kitchen", "bedroom"],
-    },
-    company: {
-      type: String,
-      required: [true, "Please provide a product company"],
+      required: [true, "Please provide product category"],
       enum: {
-        values: ["ikea", "liddy", "marcos"],
-        message: "{VALUE} is not supported",
+        values: [
+          "hiking",
+          "skiing",
+          "climbing",
+          "running",
+          "cycling",
+          "casual",
+        ],
+        message: "{VALUE} is not a valid category",
       },
     },
-    colors: {
-      type: [String],
-      default: ["#222"],
-      required: true,
-    },
+    variants: [
+      {
+        color: {
+          type: String,
+          required: [true, "Please provide color"],
+        },
+        colorCode: {
+          type: String,
+          required: [true, "Please provide color code (hex)"],
+          match: [
+            /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/,
+            "Please provide valid hex color code",
+          ],
+        },
+        sizes: [
+          {
+            size: {
+              type: String,
+              required: [true, "Please provide size"],
+              enum: {
+                values: ["XS", "S", "M", "L", "XL", "XXL"],
+                message: "{VALUE} is not a valid size",
+              },
+            },
+            inventory: {
+              type: Number,
+              required: [true, "Please provide inventory amount"],
+              min: [0, "Inventory cannot be negative"],
+              default: 0,
+            },
+          },
+        ],
+      },
+    ],
     featured: {
       type: Boolean,
       default: false,
@@ -46,11 +86,6 @@ const ProductSchema = new mongoose.Schema(
     freeShipping: {
       type: Boolean,
       default: false,
-    },
-    inventory: {
-      type: Number,
-      required: true,
-      default: 15,
     },
     averageRating: {
       type: Number,
