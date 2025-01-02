@@ -10,10 +10,53 @@ const createProduct = async (req, res) => {
   const product = await Product.create(req.body);
   res.status(StatusCodes.CREATED).json({ product });
 };
+
 const getAllProducts = async (req, res) => {
-  const products = await Product.find({});
-  res.status(StatusCodes.OK).json({ products, count: products.length });
+  const { gender, category, featured, rating } = req.query;
+  const queryObject = {};
+
+  // Filter by gender
+  if (gender) {
+    queryObject.gender = gender;
+  }
+
+  // Filter by category
+  if (category) {
+    queryObject.category = category;
+  }
+
+  // Filter by featured
+  if (featured === "true") {
+    queryObject.featured = true;
+  }
+
+  // Filter by rating (exact match)
+  if (rating) {
+    // Convert rating to a number and create a range for floating point comparison
+    const ratingNum = Number(rating);
+    queryObject.averageRating = {
+      $gte: ratingNum,
+      $lt: ratingNum + 1,
+    };
+  }
+
+  const products = await Product.find(queryObject);
+
+  // Calculate rating counts for all products (不考慮其他篩選條件)
+  const allProducts = await Product.find(gender ? { gender } : {});
+  const ratingCounts = allProducts.reduce((acc, product) => {
+    const rating = Math.floor(product.averageRating);
+    acc[rating] = (acc[rating] || 0) + 1;
+    return acc;
+  }, {});
+
+  res.status(StatusCodes.OK).json({
+    products,
+    count: products.length,
+    ratingCounts, // 添加評分統計信息
+  });
 };
+
 const getSingleProduct = async (req, res) => {
   const { id: productId } = req.params;
   const product = await Product.findOne({ _id: productId }).populate("reviews");
@@ -22,6 +65,7 @@ const getSingleProduct = async (req, res) => {
   }
   res.status(StatusCodes.OK).json({ product });
 };
+
 const updateProduct = async (req, res) => {
   const { id: productId } = req.params;
   const product = await Product.findOneAndUpdate({ _id: productId }, req.body, {
@@ -33,40 +77,17 @@ const updateProduct = async (req, res) => {
   }
   res.status(StatusCodes.OK).json({ product });
 };
+
 const deleteProduct = async (req, res) => {
   const { id: productId } = req.params;
-
   const product = await Product.findOne({ _id: productId });
-
   if (!product) {
     throw new CustomError.NotFoundError(`No product with id : ${productId}`);
   }
   await product.deleteOne();
   res.status(StatusCodes.OK).json({ msg: "Success! Product removed." });
 };
-const uploadImageLocal = async (req, res) => {
-  if (!req.files) {
-    throw new CustomError.BadRequestError("Please upload a file");
-  }
-  const productImage = req.files.image;
-  if (!productImage.mimetype.startsWith("image")) {
-    throw new CustomError.BadRequestError("Please upload an image file");
-  }
-  const maxSize = 1024 * 1024;
-  if (productImage.size > maxSize) {
-    throw new CustomError.BadRequestError(
-      "Please upload an image less than 1MB"
-    );
-  }
-  console.log(__dirname);
-  const imagePath = path.join(
-    __dirname,
-    "../public/uploads/",
-    productImage.name
-  );
-  await productImage.mv(imagePath);
-  res.status(StatusCodes.OK).json({ image: `/uploads/${productImage.name}` });
-};
+
 const uploadImage = async (req, res) => {
   const { id: productId } = req.params;
   const product = await Product.findOne({ _id: productId });
@@ -100,6 +121,7 @@ const uploadImage = async (req, res) => {
   fs.unlinkSync(req.files.image.tempFilePath);
   return res.status(StatusCodes.OK).json({ image: { src: result.secure_url } });
 };
+
 module.exports = {
   createProduct,
   getAllProducts,

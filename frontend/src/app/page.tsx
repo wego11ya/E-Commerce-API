@@ -24,7 +24,7 @@ export default function Home() {
       <section className="w-full max-w-7xl mx-auto py-2 px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Men Category */}
-          <Link href="/category/men" className="relative group cursor-pointer">
+          <Link href="/gender/men" className="relative group cursor-pointer">
             <div className="relative h-[500px] w-full">
               <Image
                 src="/images/categories/men.png"
@@ -39,10 +39,7 @@ export default function Home() {
           </Link>
 
           {/* Women Category */}
-          <Link
-            href="/category/women"
-            className="relative group cursor-pointer"
-          >
+          <Link href="/gender/women" className="relative group cursor-pointer">
             <div className="relative h-[500px] w-full">
               <Image
                 src="/images/categories/women.jpg"
@@ -57,7 +54,7 @@ export default function Home() {
           </Link>
 
           {/* Kids Category */}
-          <Link href="/category/kids" className="relative group cursor-pointer">
+          <Link href="/gender/kids" className="relative group cursor-pointer">
             <div className="relative h-[500px] w-full">
               <Image
                 src="/images/categories/kids.png"
