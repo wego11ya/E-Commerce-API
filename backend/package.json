@@ -4,7 +4,9 @@
   "description": "E-Commerce Backend API",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "dev": "nodemon app.js",
+    "seed": "node seeders/index.js"
   },
   "author": "",
   "license": "ISC",
