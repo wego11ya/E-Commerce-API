@@ -71,16 +71,8 @@ const users = [
 ];
 
 const seedUsers = async () => {
-  // Hash password for all users
-  const hashedUsers = await Promise.all(
-    users.map(async (user) => ({
-      ...user,
-      password: await bcrypt.hash(user.password, 10),
-    }))
-  );
-
-  // Create users in database
-  const createdUsers = await User.create(hashedUsers);
+  // Create users in database - password hashing will be handled by the User model's pre-save hook
+  const createdUsers = await User.create(users);
   return createdUsers;
 };
 
