@@ -134,8 +134,9 @@ export default function GenderPage({
                     key={category}
                     onClick={() =>
                       setFilters((prev) => ({
-                        ...prev,
                         category: prev.category === category ? null : category,
+                        rating: null,
+                        featured: false,
                       }))
                     }
                     className={`block w-full text-left px-2 py-1 rounded ${
@@ -158,8 +159,9 @@ export default function GenderPage({
                     key={rating}
                     onClick={() =>
                       setFilters((prev) => ({
-                        ...prev,
+                        category: null,
                         rating: prev.rating === rating ? null : rating,
+                        featured: false,
                       }))
                     }
                     className={`block w-full text-left px-2 py-1 rounded ${
@@ -182,7 +184,8 @@ export default function GenderPage({
                 <button
                   onClick={() =>
                     setFilters((prev) => ({
-                      ...prev,
+                      category: null,
+                      rating: null,
                       featured: !prev.featured,
                     }))
                   }
