@@ -125,7 +125,7 @@ export default function GenderPage({
         <div className="flex flex-col md:flex-row gap-6">
           {/* Filters Sidebar */}
           <div className="w-full md:w-64">
-            <div className="space-y-6 sticky top-24">
+            <div className="space-y-6 relative md:fixed md:top-24">
               {/* Category Filter */}
               <div className="space-y-2">
                 <h3 className="font-semibold text-lg text-black">Category</h3>

@@ -3,14 +3,7 @@ const productImages = require("../mockData/productImages");
 const productColors = require("../mockData/productColors");
 const productNames = require("../mockData/productNames");
 
-const categories = [
-  "hiking",
-  "skiing",
-  "climbing",
-  "running",
-  "cycling",
-  "casual",
-];
+const categories = ["hiking", "skiing", "climbing", "running", "cycling"];
 
 const generateProduct = (gender, index, userId) => {
   const category = categories[index % categories.length];
