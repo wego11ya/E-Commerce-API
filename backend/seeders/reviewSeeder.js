@@ -30,7 +30,7 @@ const getRandomItem = (array) =>
   array[Math.floor(Math.random() * array.length)];
 
 const generateReview = (userId, productId) => ({
-  rating: Math.floor(Math.random() * 2) + 4, // 4 or 5 stars
+  rating: Math.floor(Math.random() * 5) + 1, // 1-5 stars
   title: getRandomItem(reviewTitles),
   comment: getRandomItem(reviewComments),
   userId,
