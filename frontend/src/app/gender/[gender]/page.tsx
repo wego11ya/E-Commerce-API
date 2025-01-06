@@ -170,7 +170,7 @@ export default function GenderPage({
                         : "text-black hover:bg-gray-100"
                     }`}
                   >
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
                       <div className="flex">{renderStars(rating)}</div>
                       <span>({ratingCounts[rating] || 0})</span>
                     </div>
