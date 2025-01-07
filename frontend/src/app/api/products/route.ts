@@ -49,7 +49,6 @@ export async function GET(request: Request) {
   }
 
   const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/v1/products?gender=${gender}`;
-  console.log("Fetching products from:", apiUrl);
 
   try {
     const response = await fetchWithRetry(apiUrl, {
@@ -70,9 +69,7 @@ export async function GET(request: Request) {
     }
 
     const data = await response.json();
-    console.log("API Response:", data);
 
-    // Ensure we have the expected data structure
     if (!data || !data.products) {
       console.error("Unexpected API response format:", data);
       return NextResponse.json(
