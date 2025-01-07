@@ -7,16 +7,17 @@ import { StarRating } from "@/components/StarRating";
 import { formatPrice } from "@/lib/utils";
 
 interface ProductDetailPageProps {
-  params: {
+  params: Promise<{
     productId: string;
-  };
+  }>;
 }
 
 export default async function ProductDetailPage({
-  params: { productId },
+  params,
 }: ProductDetailPageProps) {
-  const product = await getProductById(productId);
-  const reviews = await getReviewsByProductId(productId);
+  const resolvedParams = await params;
+  const product = await getProductById(resolvedParams.productId);
+  const reviews = await getReviewsByProductId(resolvedParams.productId);
 
   if (!product) {
     return <div>Product not found</div>;
