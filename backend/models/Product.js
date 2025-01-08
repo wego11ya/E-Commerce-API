@@ -83,10 +83,6 @@ const ProductSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    freeShipping: {
-      type: Boolean,
-      default: false,
-    },
     averageRating: {
       type: Number,
       default: 0,

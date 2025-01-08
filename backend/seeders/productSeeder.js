@@ -32,7 +32,6 @@ const generateProduct = (gender, index, userId) => {
       ],
     })),
     featured: Math.random() < 0.2,
-    freeShipping: Math.random() < 0.3,
     userId,
   };
 };

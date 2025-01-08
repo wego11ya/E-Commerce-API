@@ -1,27 +1,22 @@
 const mongoose = require("mongoose");
 const SingleOrderItemSchema = mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  image: {
-    type: String,
-    required: true,
-  },
+  name: { type: String, required: true },
+  image: { type: String, required: true },
   price: { type: Number, required: true },
   amount: { type: Number, required: true },
-  productId: {
-    type: mongoose.Types.ObjectId,
-    ref: "Product",
+  productId: { type: mongoose.Types.ObjectId, ref: "Product", required: true },
+  variantId: { type: mongoose.Types.ObjectId, required: true },
+  size: {
+    type: String,
+    enum: ["XS", "S", "M", "L", "XL", "XXL"],
     required: true,
   },
+  color: { type: String, required: true },
+  colorCode: { type: String, required: true },
 });
+
 const OrderSchema = new mongoose.Schema(
   {
-    tax: {
-      type: Number,
-      required: true,
-    },
     shippingFee: {
       type: Number,
       required: true,
