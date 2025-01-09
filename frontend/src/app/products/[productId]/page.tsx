@@ -10,6 +10,7 @@ import { useCart } from "@/contexts/CartContext";
 import { Product, Review, Variant } from "@/types";
 import { getProductById } from "@/lib/actions/product.actions";
 import { getReviewsByProductId } from "@/lib/actions/review.actions";
+import React from "react";
 
 interface ProductDetailPageProps {
   params: {
@@ -17,9 +18,10 @@ interface ProductDetailPageProps {
   };
 }
 
-export default function ProductDetailPage({
-  params: { productId },
-}: ProductDetailPageProps) {
+export default function ProductDetailPage({ params }: ProductDetailPageProps) {
+  const resolvedParams = React.use(params) as ProductDetailPageProps["params"];
+  const productId = resolvedParams.productId;
+
   const [product, setProduct] = useState<Product | null>(null);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [selectedVariant, setSelectedVariant] = useState<Variant | null>(null);
