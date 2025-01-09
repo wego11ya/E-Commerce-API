@@ -1,5 +1,5 @@
 import { metadata } from "./metadata";
-import ClientLayout from "./layout.client";
+import ClientLayout from "./layout";
 
 export { metadata };
 

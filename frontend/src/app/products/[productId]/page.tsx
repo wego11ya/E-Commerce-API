@@ -1,27 +1,60 @@
+"use client";
+
 import Image from "next/image";
 import { ShoppingCart } from "lucide-react";
-import { getProductById } from "@/lib/actions/product.actions";
-import { getReviewsByProductId } from "@/lib/actions/review.actions";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { StarRating } from "@/components/StarRating";
 import { formatPrice } from "@/lib/utils";
+import { useCart } from "@/contexts/CartContext";
+import { Product, Review, Variant } from "@/types";
+import { getProductById } from "@/lib/actions/product.actions";
+import { getReviewsByProductId } from "@/lib/actions/review.actions";
 
 interface ProductDetailPageProps {
-  params: Promise<{
+  params: {
     productId: string;
-  }>;
+  };
 }
 
-export default async function ProductDetailPage({
-  params,
+export default function ProductDetailPage({
+  params: { productId },
 }: ProductDetailPageProps) {
-  const resolvedParams = await params;
-  const product = await getProductById(resolvedParams.productId);
-  const reviews = await getReviewsByProductId(resolvedParams.productId);
+  const [product, setProduct] = useState<Product | null>(null);
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [selectedVariant, setSelectedVariant] = useState<Variant | null>(null);
+  const [selectedSize, setSelectedSize] = useState<string>("");
+  const { addToCart } = useCart();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const productData = await getProductById(productId);
+      const reviewsData = await getReviewsByProductId(productId);
+
+      setProduct(productData);
+      setReviews(reviewsData);
+
+      // Set default selections
+      if (productData && productData.variants.length > 0) {
+        setSelectedVariant(productData.variants[0]);
+        if (productData.variants[0].sizes.length > 0) {
+          setSelectedSize(productData.variants[0].sizes[0].size);
+        }
+      }
+    };
+
+    fetchData();
+  }, [productId]);
 
   if (!product) {
-    return <div>Product not found</div>;
+    return <div>Loading...</div>;
   }
+
+  const handleAddToCart = () => {
+    if (product && selectedVariant && selectedSize) {
+      addToCart(product, selectedVariant, selectedSize);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -54,11 +87,22 @@ export default async function ProductDetailPage({
                 </h3>
                 <div className="flex gap-3">
                   {product.variants.map((variant, idx) => (
-                    <div
+                    <button
                       key={idx}
-                      className="w-10 h-10 rounded-full border-2 border-gray-200 cursor-pointer hover:border-black transition-colors"
+                      className={`w-10 h-10 rounded-full border-2 transition-colors ${
+                        selectedVariant?._id === variant._id
+                          ? "border-black"
+                          : "border-gray-200 hover:border-gray-400"
+                      }`}
                       style={{ backgroundColor: variant.colorCode }}
                       title={variant.color}
+                      onClick={() => {
+                        setSelectedVariant(variant);
+                        // Reset size when color changes
+                        if (variant.sizes.length > 0) {
+                          setSelectedSize(variant.sizes[0].size);
+                        }
+                      }}
                     />
                   ))}
                 </div>
@@ -68,11 +112,17 @@ export default async function ProductDetailPage({
               <div>
                 <h3 className="text-lg font-semibold mb-3 text-black">Sizes</h3>
                 <div className="flex gap-3">
-                  {product.variants[0]?.sizes.map((sizeObj, idx) => (
+                  {selectedVariant?.sizes.map((sizeObj, idx) => (
                     <Button
                       key={idx}
                       variant="outline"
-                      className="w-14 h-14 text-lg bg-gray-100 text-black hover:bg-black hover:text-white border-0"
+                      className={`w-14 h-14 text-lg ${
+                        selectedSize === sizeObj.size
+                          ? "bg-black text-white hover:bg-black/90"
+                          : "bg-gray-100 text-black hover:bg-gray-200"
+                      } border-0`}
+                      onClick={() => setSelectedSize(sizeObj.size)}
+                      disabled={sizeObj.inventory === 0}
                     >
                       {sizeObj.size}
                     </Button>
@@ -82,7 +132,11 @@ export default async function ProductDetailPage({
 
               {/* Add to Cart Button */}
               <div className="mt-8">
-                <Button className="w-full h-14 text-base font-normal bg-black text-white hover:bg-black/90">
+                <Button
+                  className="w-full h-14 text-base font-normal bg-black text-white hover:bg-black/90"
+                  onClick={handleAddToCart}
+                  disabled={!selectedVariant || !selectedSize}
+                >
                   <ShoppingCart className="mr-2 h-5 w-5" />
                   ADD TO MY CART
                 </Button>

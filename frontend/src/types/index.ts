@@ -17,6 +17,7 @@ export interface Product {
 }
 
 export interface Variant {
+  _id: string;
   color: string;
   colorCode: string;
   sizes: Size[];
