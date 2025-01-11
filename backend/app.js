@@ -51,7 +51,16 @@ app.use(
   })
 );
 app.use(mongoSanitize());
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    exposedHeaders: ["Content-Range", "X-Content-Range"],
+    maxAge: 86400,
+  })
+);
 
 app.use(express.json());
 app.use(cookieParser(process.env.JWT_SECRET));
