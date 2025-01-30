@@ -19,8 +19,7 @@ interface ProductDetailPageProps {
 }
 
 export default function ProductDetailPage({ params }: ProductDetailPageProps) {
-  const resolvedParams = React.use(params) as ProductDetailPageProps["params"];
-  const productId = resolvedParams.productId;
+  const { productId } = params;
 
   const [product, setProduct] = useState<Product | null>(null);
   const [reviews, setReviews] = useState<Review[]>([]);
