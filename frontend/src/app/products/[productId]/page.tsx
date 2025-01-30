@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { ShoppingCart } from "lucide-react";
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { StarRating } from "@/components/StarRating";
@@ -12,14 +13,8 @@ import { getProductById } from "@/lib/actions/product.actions";
 import { getReviewsByProductId } from "@/lib/actions/review.actions";
 import React from "react";
 
-interface ProductDetailPageProps {
-  params: {
-    productId: string;
-  };
-}
-
-export default function ProductDetailPage({ params }: ProductDetailPageProps) {
-  const { productId } = params;
+export default function ProductDetailPage() {
+  const { productId } = useParams() as { productId: string };
 
   const [product, setProduct] = useState<Product | null>(null);
   const [reviews, setReviews] = useState<Review[]>([]);
