@@ -1,0 +1,5 @@
+// frontend
+NEXT_PUBLIC_BASE_URL=
+
+// backend
+NEXT_PUBLIC_API_URL=
