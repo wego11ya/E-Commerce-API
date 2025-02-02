@@ -4,11 +4,11 @@ This E-Commerce API project serves as the backend for an e-commerce platform. Th
 
 # DB Schema Diagram
 
-![E-Commerce API DB Schema Diagram](/public/E-Commerce%20API%20DB%20Schema%20Diagram.png)
+![E-Commerce API DB Schema Diagram](/frontend/public/readme/E-Commerce%20API%20DB%20Schema%20Diagram.png)
 
 # System Architecture
 
-![System Architecture](/public/E-Commerce%20API%20System%20Architecture.png)
+![System Architecture](/frontend/public/readme/E-Commerce%20API%20System%20Architecture.png)
 
 # Product Features
 
