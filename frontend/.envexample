@@ -1,5 +1,7 @@
-// frontend
+# frontend
+# http://localhost:3000 or deployed URL
 NEXT_PUBLIC_BASE_URL=
 
-// backend
+# backend 
+# http://localhost:5000 or deployed URL
 NEXT_PUBLIC_API_URL=

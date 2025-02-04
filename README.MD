@@ -1,43 +1,180 @@
-# E-Commerce API Introduction
+# E-Commerce Project (Frontend In Development, Backend Fully Developed)
 
-This E-Commerce API project serves as the backend for an e-commerce platform. The API is built using Node.js and Express, providing a robust and scalable solution for managing product data, user authentication, and order processing. MongoDB is used as the database, and Mongoose is utilized for object data modeling (ODM). The project is structured to handle various e-commerce functionalities, including product listing, user authentication (registration, login, and logout), and managing customer orders. The API also includes security enhancements like rate limiting and sanitization to prevent common vulnerabilities.
+A full-stack e-commerce clothing platform built with Next.js frontend and Node.js/Express.js backend. Features include user authentication, product management, shopping cart functionality, Stripe payment integration, review system, and comprehensive admin management capabilities.
 
-# DB Schema Diagram
+## 🌐 Live Demo
 
-![E-Commerce API DB Schema Diagram](/frontend/public/readme/E-Commerce%20API%20DB%20Schema%20Diagram.png)
+Visit the live site: https://e-commerce-tau-azure.vercel.app
 
-# System Architecture
+> **Development Status:**
+>
+> - **Frontend**: Currently in active development. Only the features shown in the screenshots below are implemented.
+> - **Backend**: Fully developed and operational with complete API functionality.
+
+## 🚀 Tech Stack
+
+### Frontend
+
+- **Framework**: Next.js
+- **Styling**: TailwindCSS
+- **State Management**: React Context
+- **Deployment**: Vercel
+
+### Backend
+
+- **Runtime**: Node.js
+- **Framework**: Express.js
+- **Database**: MongoDB
+- **Authentication**: JWT
+- **Image Storage**: Cloudinary
+- **Payment Processing**: Stripe API
+- **Deployment**: Render
+
+## ✨ Key Features
+
+### User Features
+
+- User authentication (login/register)
+- Browse products by gender categories
+- Filter products by category, rating, and featured status
+- Detailed product pages with size/color selection
+- Shopping cart management
+- Secure checkout with Stripe
+- Product reviews and ratings
+- Order history tracking
+
+### Admin Features
+
+- Product management (CRUD operations)
+- Order management
+- User management
+- Image upload and management via Cloudinary
+
+## 📸 Screenshots
+
+> **Note**: The following screenshots represent the currently implemented frontend features. While the frontend is still under active development, the backend API fully supports all e-commerce functionalities including user authentication, product management, order processing, reviews CRUD operations and more.
+
+### Home Page
+
+Gender-based product categorization
+![Home Page](/frontend/public/readme/E-Commerce%20home%20page.png)
+
+### Login Page
+
+Secure user authentication
+![Login Page](/frontend/public/readme/E-Commerce%20login%20page.png.png)
+
+### Products Page
+
+Advanced filtering by Category, Rating, and Featured status
+![Products Page](/frontend/public/readme/E-Commerce%20products%20page.png)
+
+### Product Details
+
+Detailed product information with reviews and size/color selection
+![Product Page](/frontend/public/readme/E-Commerce%20product%20page.png)
+
+### Shopping Cart
+
+Cart management with quantity adjustment
+![Cart Page](/frontend/public/readme/E-Commerce%20cart%20page.png)
+
+## 🏗 System Architecture
 
 ![System Architecture](/frontend/public/readme/E-Commerce%20API%20System%20Architecture.png)
 
-# Product Features
+## 📊 Database Schema
 
-- User Authentication: Secure login and registration with JWT-based authentication.
+![DB Schema Diagram](/frontend/public/readme/E-Commerce%20API%20DB%20Schema%20Diagram.png)
 
-- Product Management: Admin users can create, update, delete, and manage product listings.
+## 🛠 API Features
 
-- Order Management: Customers can place orders for products, and admin users can manage these orders.
+### Authentication
 
-- Product Reviews: Customers can leave reviews for products, helping other users make informed decisions.
+- User registration and login
+- JWT-based authentication
+- Role-based authorization (Admin/User)
 
-- Image Uploads: Cloudinary integration allows admins to upload and manage product images.
+### Products
 
-- Security: Features like input sanitization, rate limiting, and data validation ensure a secure API.
+- CRUD operations for products
+- Advanced filtering and search
+- Image upload via Cloudinary
+- Product reviews and ratings
 
-# Install Locally
+### Reviews
 
-1. Install Node.js, npm, nodemon.
-2. Clone this project to your local repository
-3. Change directory to project folder
-4. Install npm packages `npm install`
-5. Create a .env file based on the instruction of .env.example
-6. Run project `npm run start`
-7. You will see this message when the project has been successfully executed
+- Create product reviews (one review per user per product)
+- Read all reviews or single review details
+- Update user's own reviews (rating, title, comment)
+- Delete user's own reviews
+- View reviews for specific products
+- Automatic product rating calculation
 
+### Orders
+
+- Order creation and management
+- Payment processing with Stripe
+- Order status tracking
+- Order history
+
+### Users
+
+- User profile management
+- Password updates
+- Admin user management
+
+## 🚀 Local Development Setup
+
+### Prerequisites
+
+- Node.js
+- npm
+- MongoDB
+
+### Backend Setup
+
+1. Clone the repository
+
+   ```bash
+   git clone [repository-url]
    ```
-   Server is listening on port 3000
+
+2. Navigate to backend directory
+
+   ```bash
+   cd backend
    ```
 
-# Developer
+3. Install dependencies
+
+   ```bash
+   npm install
+   ```
+
+4. Create .env file (based on .env.example)
+
+5. Start the server
+   ```bash
+   npm run start
+   ```
+
+## 🔑 Test Accounts
+
+### Administrator
+
+```
+email: admin@example.com
+password: 12345678
+```
+
+### Regular User
+
+```
+email: user1@example.com
+password: 12345678
+```
+
+## 👨‍💻 Developer
 
 ### [Wei Lin](https://github.com/wego11ya)
