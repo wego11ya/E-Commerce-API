@@ -2,7 +2,11 @@
 
 A full-stack e-commerce clothing platform built with Next.js frontend and Node.js/Express.js backend. Features include user authentication, product management, shopping cart functionality, Stripe payment integration, review system, and comprehensive admin management capabilities.
 
-## 🌐 Live Demo
+## 🔗 Backend API Documentation
+
+Visit the backend API documentation: https://e-commerce-backend-s1h1.onrender.com
+
+## 🌐 Live Demo (Frontend Under Development)
 
 Visit the live site: https://e-commerce-tau-azure.vercel.app
 
