@@ -1,10 +1,13 @@
-# E-Commerce Project (Frontend In Development, Backend Fully Developed)
+# E-Commerce Project (Backend Fully Developed, Frontend In Development)
 
 A full-stack e-commerce clothing platform built with Next.js frontend and Node.js/Express.js backend. Features include user authentication, product management, shopping cart functionality, Stripe payment integration, review system, and comprehensive admin management capabilities.
 
-## 🔗 Backend API Documentation
+## 🔗 Backend API - Fully Developed & Ready to Use
 
-Visit the backend API documentation: https://e-commerce-backend-s1h1.onrender.com
+The backend API is **completely developed** and operational with all e-commerce functionalities implemented. You can:
+
+- **Explore & Test the API**: Visit my interactive Swagger UI documentation at [https://e-commerce-backend-s1h1.onrender.com/api-docs](https://e-commerce-backend-s1h1.onrender.com/api-docs)
+- **Try All Endpoints**: Use the Swagger interface to test all available endpoints with the test accounts provided below
 
 ## 🌐 Live Demo (Frontend Under Development)
 
@@ -12,8 +15,8 @@ Visit the live site: https://e-commerce-tau-azure.vercel.app
 
 > **Development Status:**
 >
-> - **Frontend**: Currently in active development. Only the features shown in the screenshots below are implemented.
-> - **Backend**: Fully developed and operational with complete API functionality.
+> - **Backend**: ✅ **FULLY DEVELOPED** and operational with complete API functionality
+> - **Frontend**: 🚧 Currently in active development. Only the features shown in the screenshots below are implemented.
 
 ## 🚀 Tech Stack
 
