@@ -60,6 +60,7 @@ app.use(mongoSanitize());
 const allowedOrigins = [
   "http://localhost:3000", // 本地開發
   "http://localhost:5000",
+  "https://e-commerce-backend-s1h1.onrender.com",
   process.env.FRONTEND_URL, // Render 上的前端 URL（從環境變數讀取）
 ].filter(Boolean);
 app.use(
