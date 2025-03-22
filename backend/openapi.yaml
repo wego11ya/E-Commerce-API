@@ -1,0 +1,389 @@
+openapi: 3.0.0
+info:
+  title: E-Commerce
+  version: 1.0.0
+servers:
+  - url: https://e-commerce-backend-s1h1.onrender.com/api/v1
+    description: 雲端部署
+  - url: http://localhost:5000/api/v1
+    description: 本地環境
+tags:
+  - name: Auth
+  - name: User
+  - name: Product
+  - name: Review
+  - name: Order
+paths:
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Register User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: test
+                email: test@gmail.com
+                password: "12345678"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /auth/logout:
+    get:
+      tags:
+        - Auth
+      summary: Logout User
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: admin@example.com
+                password: "12345678"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /users:
+    get:
+      tags:
+        - User
+      summary: Get All Users
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /users/677e0b7279c9a11da7d9f815:
+    get:
+      tags:
+        - User
+      summary: Get Single User
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /users/showMe:
+    get:
+      tags:
+        - User
+      summary: Show Current User
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /users/updateUser:
+    patch:
+      tags:
+        - User
+      summary: Update User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: test
+                email: test@gmail.com
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /users/updateUserPassword:
+    patch:
+      tags:
+        - User
+      summary: Update User Password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                oldPassword: "123456789"
+                newPassword: "12345678"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /products:
+    post:
+      tags:
+        - Product
+      summary: Create Product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Mountain Trail Hiking Boots
+                price: 149.99
+                description: >-
+                  Premium waterproof hiking boots designed for challenging
+                  mountain trails. Features include reinforced toe caps,
+                  breathable Gore-Tex lining, and superior grip outsoles for
+                  stability on rocky terrain.
+                image: >-
+                  https://plus.unsplash.com/premium_photo-1726880469038-6f72813025db?q=80&w=2046&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
+                gender: Men
+                category: hiking
+                variants:
+                  - color: Black
+                    colorCode: "#000000"
+                    sizes:
+                      - size: M
+                        inventory: 25
+                      - size: L
+                        inventory: 20
+                      - size: XL
+                        inventory: 15
+                  - color: Brown
+                    colorCode: "#8B4513"
+                    sizes:
+                      - size: S
+                        inventory: 10
+                      - size: M
+                        inventory: 30
+                      - size: L
+                        inventory: 25
+                featured: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Product
+      summary: Get All Products
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /products/677e0b7279c9a11da7d9f84b:
+    get:
+      tags:
+        - Product
+      summary: Get Single Product
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /products/67de2dabf66a79bd9b4c1d7c:
+    patch:
+      tags:
+        - Product
+      summary: Update Product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Mountain Trail Hiking
+                price: 123
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /products/66a884ef1c45375227ed2083:
+    delete:
+      tags:
+        - Product
+      summary: Delete Product
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /products/67de2dabf66a79bd9b4c1d7c/uploadImage:
+    post:
+      tags:
+        - Product
+      summary: Upload Image
+      requestBody:
+        content: {}
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /products/677e0b7279c9a11da7d9faeb/reviews:
+    get:
+      tags:
+        - Product
+      summary: Get Single Product Reviews
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /reviews:
+    get:
+      tags:
+        - Review
+      summary: Get All Reviews
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - Review
+      summary: Create Review
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                rating: 5
+                title: 非常好用的產品
+                comment: >-
+                  我很喜歡這個產品，材質優良且耐用。穿起來很舒適，在長途健行時提供了很好的支撐力和保護。唯一的小缺點是比預期中重了一點，但整體來說非常滿意，值得推薦！
+                productId: 67de2dabf66a79bd9b4c1d7c
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /reviews/677e0b7379c9a11da7d9fb2b:
+    get:
+      tags:
+        - Review
+      summary: Get Single Review
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /reviews/67de3456f66a79bd9b4c2df0:
+    patch:
+      tags:
+        - Review
+      summary: Update Review
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                rating: 4
+                title: very good product
+                comment: so good
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /reviews/66a888d71c45375227ed2099:
+    delete:
+      tags:
+        - Review
+      summary: Delete Review
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /orders/:
+    post:
+      tags:
+        - Order
+      summary: Create Order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                items:
+                  - productId: 677e0b7279c9a11da7d9f84b
+                    variantId: 677e0b7279c9a11da7d9f84c
+                    size: M
+                    color: Electric Blue
+                    colorCode: "#0066FF"
+                    amount: 2
+                  - productId: 677e0b7279c9a11da7d9f84b
+                    variantId: 677e0b7279c9a11da7d9f856
+                    size: L
+                    color: Neon Green
+                    colorCode: "#39FF14"
+                    amount: 1
+                shippingFee: 15
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Order
+      summary: Get All Orders
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /orders/showAllMyOrders:
+    get:
+      tags:
+        - Order
+      summary: Show Current User Orders
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /orders/67de4837401e843bfc515f7d:
+    get:
+      tags:
+        - Order
+      summary: Get Single Order
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+    patch:
+      tags:
+        - Order
+      summary: Update Order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                paymentIntentId: someRandomId
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}

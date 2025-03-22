@@ -1,0 +1,582 @@
+{
+	"info": {
+		"_postman_id": "a8acd2e8-4eab-4356-9687-265001b685ff",
+		"name": "E-Commerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26478802"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"test\",\r\n    \"email\":\"test@gmail.com\",\r\n    \"password\":\"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/register",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/auth/logout",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"admin@example.com\",\r\n    \"password\":\"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/677e0b7279c9a11da7d9f815",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"677e0b7279c9a11da7d9f815"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Current User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/showMe",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"showMe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"test\",\r\n    \"email\":\"test@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/users/updateUser",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"updateUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Password",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldPassword\":\"123456789\",\r\n    \"newPassword\":\"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/users/updateUserPassword",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"updateUserPassword"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Create Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Mountain Trail Hiking Boots\",\r\n  \"price\": 149.99,\r\n  \"description\": \"Premium waterproof hiking boots designed for challenging mountain trails. Features include reinforced toe caps, breathable Gore-Tex lining, and superior grip outsoles for stability on rocky terrain.\",\r\n  \"image\": \"https://plus.unsplash.com/premium_photo-1726880469038-6f72813025db?q=80&w=2046&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\",\r\n  \"gender\": \"Men\",\r\n  \"category\": \"hiking\",\r\n  \"variants\": [\r\n    {\r\n      \"color\": \"Black\",\r\n      \"colorCode\": \"#000000\",\r\n      \"sizes\": [\r\n        {\r\n          \"size\": \"M\",\r\n          \"inventory\": 25\r\n        },\r\n        {\r\n          \"size\": \"L\",\r\n          \"inventory\": 20\r\n        },\r\n        {\r\n          \"size\": \"XL\",\r\n          \"inventory\": 15\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \"color\": \"Brown\",\r\n      \"colorCode\": \"#8B4513\",\r\n      \"sizes\": [\r\n        {\r\n          \"size\": \"S\",\r\n          \"inventory\": 10\r\n        },\r\n        {\r\n          \"size\": \"M\",\r\n          \"inventory\": 30\r\n        },\r\n        {\r\n          \"size\": \"L\",\r\n          \"inventory\": 25\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"featured\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/products",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/products",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/products/677e0b7279c9a11da7d9f84b",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products",
+								"677e0b7279c9a11da7d9f84b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n    \"name\": \"Mountain Trail Hiking\",\r\n    \"price\": 123\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/products/67de2dabf66a79bd9b4c1d7c",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products",
+								"67de2dabf66a79bd9b4c1d7c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/products/66a884ef1c45375227ed2083",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products",
+								"66a884ef1c45375227ed2083"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Image",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "k1ATyxYOH/1.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/products/67de2dabf66a79bd9b4c1d7c/uploadImage",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products",
+								"67de2dabf66a79bd9b4c1d7c",
+								"uploadImage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Product Reviews",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/products/677e0b7279c9a11da7d9faeb/reviews",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products",
+								"677e0b7279c9a11da7d9faeb",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Review",
+			"item": [
+				{
+					"name": "Get All Reviews",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/reviews",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Review",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"rating\": 5,\r\n  \"title\": \"非常好用的產品\",\r\n  \"comment\": \"我很喜歡這個產品，材質優良且耐用。穿起來很舒適，在長途健行時提供了很好的支撐力和保護。唯一的小缺點是比預期中重了一點，但整體來說非常滿意，值得推薦！\",\r\n  \"productId\": \"67de2dabf66a79bd9b4c1d7c\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/reviews",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Review",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/reviews/677e0b7379c9a11da7d9fb2b",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"reviews",
+								"677e0b7379c9a11da7d9fb2b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Review",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rating\":4,\r\n    \"title\":\"very good product\",\r\n    \"comment\":\"so good\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/reviews/67de3456f66a79bd9b4c2df0",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"reviews",
+								"67de3456f66a79bd9b4c2df0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Review",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/reviews/66a888d71c45375227ed2099",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"reviews",
+								"66a888d71c45375227ed2099"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Create Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"items\": [\r\n    {\r\n      \"productId\": \"677e0b7279c9a11da7d9f84b\",\r\n      \"variantId\": \"677e0b7279c9a11da7d9f84c\",\r\n      \"size\": \"M\",\r\n      \"color\": \"Electric Blue\",\r\n      \"colorCode\": \"#0066FF\",\r\n      \"amount\": 2\r\n    },\r\n    {\r\n      \"productId\": \"677e0b7279c9a11da7d9f84b\",\r\n      \"variantId\": \"677e0b7279c9a11da7d9f856\",\r\n      \"size\": \"L\",\r\n      \"color\": \"Neon Green\",\r\n      \"colorCode\": \"#39FF14\",\r\n      \"amount\": 1\r\n    }\r\n  ],\r\n  \"shippingFee\": 15\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/orders/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"orders",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/orders/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"orders",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Current User Orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/orders/showAllMyOrders",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"orders",
+								"showAllMyOrders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/orders/67de4837401e843bfc515f7d",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"orders",
+								"67de4837401e843bfc515f7d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Order",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"paymentIntentId\":\"someRandomId\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/orders/67de4837401e843bfc515f7d",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"orders",
+								"67de4837401e843bfc515f7d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

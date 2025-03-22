@@ -2,7 +2,13 @@ require("dotenv").config();
 require("express-async-errors");
 // express server
 const express = require("express");
+const fs = require("fs");
+const yaml = require("js-yaml");
 const app = express();
+
+// 引入 Swagger UI Express
+const swaggerUi = require("swagger-ui-express");
+const openapiDocument = yaml.load(fs.readFileSync("./openapi.yaml", "utf8"));
 
 // morgan for logging
 const morgan = require("morgan");
@@ -53,6 +59,7 @@ app.use(
 app.use(mongoSanitize());
 const allowedOrigins = [
   "http://localhost:3000", // 本地開發
+  "http://localhost:5000",
   process.env.FRONTEND_URL, // Render 上的前端 URL（從環境變數讀取）
 ].filter(Boolean);
 app.use(
@@ -83,6 +90,8 @@ app.use("/api/v1/users", userRouter);
 app.use("/api/v1/products", productRouter);
 app.use("/api/v1/reviews", reviewRouter);
 app.use("/api/v1/orders", orderRouter);
+// 當使用者進入 /api-docs 時，呈現 Swagger UI
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openapiDocument));
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
