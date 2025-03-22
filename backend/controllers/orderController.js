@@ -11,13 +11,14 @@ const fakeStripeAPI = async ({ amount, currency }) => {
 };
 
 const createOrder = async (req, res) => {
-  const { items: cartItems, tax, shippingFee } = req.body;
+  const { items: cartItems, shippingFee } = req.body;
 
   if (!cartItems || cartItems.length < 1) {
     throw new CustomError.BadRequestError("Cart items cannot be empty");
   }
-  if (!tax || !shippingFee) {
-    throw new CustomError.BadRequestError("Tax and shipping fee are required");
+
+  if (!shippingFee) {
+    throw new CustomError.BadRequestError("Shipping fee is required");
   }
 
   let orderItems = [];
@@ -30,6 +31,22 @@ const createOrder = async (req, res) => {
         `No product with id : ${item.productId}`
       );
     }
+    if (!item.variantId) {
+      throw new CustomError.BadRequestError(
+        `Variant ID is required for product: ${dbProduct.name}`
+      );
+    }
+    if (!item.size) {
+      throw new CustomError.BadRequestError(
+        `Size is required for product: ${dbProduct.name}`
+      );
+    }
+    if (!item.color || !item.colorCode) {
+      throw new CustomError.BadRequestError(
+        `Color and color code are required for product: ${dbProduct.name}`
+      );
+    }
+
     const { name, price, image, _id } = dbProduct;
     const singleOrderItem = {
       name,
@@ -37,14 +54,18 @@ const createOrder = async (req, res) => {
       image,
       amount: item.amount,
       productId: _id,
+      variantId: item.variantId,
+      size: item.size,
+      color: item.color,
+      colorCode: item.colorCode,
     };
+
     // add item to orderItems
     orderItems.push(singleOrderItem);
     // calculate subtotal
     subtotal += item.amount * price;
   }
-  // calculate total
-  const total = tax + shippingFee + subtotal;
+  const total = shippingFee + subtotal;
   // get client secret
   const paymentIntent = await fakeStripeAPI({
     amount: total,
@@ -54,7 +75,6 @@ const createOrder = async (req, res) => {
     orderItems,
     total,
     subtotal,
-    tax,
     shippingFee,
     clientSecret: paymentIntent.client_secret,
     userId: req.user.userId,
