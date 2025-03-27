@@ -71,11 +71,18 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /users/677e0b7279c9a11da7d9f815:
+  /users/{id}:
     get:
       tags:
         - User
       summary: Get Single User
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: User ID
       responses:
         "200":
           description: Successful response
@@ -183,21 +190,34 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /products/677e0b7279c9a11da7d9f84b:
+  /products/{id}:
     get:
       tags:
         - Product
       summary: Get Single Product
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Product ID
       responses:
         "200":
           description: Successful response
           content:
             application/json: {}
-  /products/67de2dabf66a79bd9b4c1d7c:
     patch:
       tags:
         - Product
       summary: Update Product
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Product ID
       requestBody:
         content:
           application/json:
@@ -211,21 +231,34 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /products/66a884ef1c45375227ed2083:
     delete:
       tags:
         - Product
       summary: Delete Product
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Product ID
       responses:
         "200":
           description: Successful response
           content:
             application/json: {}
-  /products/67de2dabf66a79bd9b4c1d7c/uploadImage:
+  /products/{id}/uploadImage:
     post:
       tags:
         - Product
       summary: Upload Image
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Product ID
       requestBody:
         content: {}
       responses:
@@ -233,11 +266,18 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /products/677e0b7279c9a11da7d9faeb/reviews:
+  /products/{id}/reviews:
     get:
       tags:
         - Product
       summary: Get Single Product Reviews
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Product ID
       responses:
         "200":
           description: Successful response
@@ -273,21 +313,34 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /reviews/677e0b7379c9a11da7d9fb2b:
+  /reviews/{id}:
     get:
       tags:
         - Review
       summary: Get Single Review
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Review ID
       responses:
         "200":
           description: Successful response
           content:
             application/json: {}
-  /reviews/67de3456f66a79bd9b4c2df0:
     patch:
       tags:
         - Review
       summary: Update Review
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Review ID
       requestBody:
         content:
           application/json:
@@ -302,11 +355,17 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /reviews/66a888d71c45375227ed2099:
     delete:
       tags:
         - Review
       summary: Delete Review
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Review ID
       responses:
         "200":
           description: Successful response
@@ -361,11 +420,18 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /orders/67de4837401e843bfc515f7d:
+  /orders/{id}:
     get:
       tags:
         - Order
       summary: Get Single Order
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Order ID
       responses:
         "200":
           description: Successful response
@@ -375,6 +441,13 @@ paths:
       tags:
         - Order
       summary: Update Order
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Order ID
       requestBody:
         content:
           application/json:
