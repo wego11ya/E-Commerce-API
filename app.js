@@ -8,7 +8,10 @@ const app = express();
 
 // 引入 Swagger UI Express
 const swaggerUi = require("swagger-ui-express");
-const openapiDocument = yaml.load(fs.readFileSync("./openapi.yaml", "utf8"));
+// Load base OpenAPI document
+const baseOpenApiDocument = yaml.load(
+  fs.readFileSync("./openapi.yaml", "utf8")
+);
 
 // morgan for logging
 const morgan = require("morgan");
@@ -91,8 +94,30 @@ app.use("/api/v1/users", userRouter);
 app.use("/api/v1/products", productRouter);
 app.use("/api/v1/reviews", reviewRouter);
 app.use("/api/v1/orders", orderRouter);
-// 當使用者進入 /api-docs 時，呈現 Swagger UI
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openapiDocument));
+// 當使用者進入 /api-docs 時，呈現 Swagger UI，並動態設置 server URL
+app.use(
+  "/api-docs",
+  (req, res, next) => {
+    // Create a copy of the document to avoid modifying the original
+    const openapiDocument = JSON.parse(JSON.stringify(baseOpenApiDocument));
+
+    // Get host from request
+    const protocol = req.headers["x-forwarded-proto"] || req.protocol;
+    const host = req.get("host");
+    const baseUrl = `${protocol}://${host}/api/v1`;
+
+    // Add current server to the beginning of the servers array
+    openapiDocument.servers.unshift({
+      url: baseUrl,
+      description: "Current environment",
+    });
+
+    req.openapiDocument = openapiDocument;
+    next();
+  },
+  swaggerUi.serve,
+  (req, res) => swaggerUi.setup(req.openapiDocument)(req, res)
+);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
