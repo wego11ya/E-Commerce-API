@@ -5,7 +5,7 @@ info:
 servers:
   - url: https://e-commerce-backend-s1h1.onrender.com/api/v1
     description: 雲端部署
-  - url: http://localhost:5000/api/v1
+  - url: http://localhost:3000/api/v1
     description: 本地環境
 tags:
   - name: Auth
