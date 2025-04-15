@@ -1,33 +1,25 @@
-# E-Commerce Project (Backend Fully Developed, Frontend In Development)
+# E-Commerce API Introduction
 
-A full-stack e-commerce clothing platform built with Next.js frontend and Node.js/Express.js backend. Features include user authentication, product management, shopping cart functionality, Stripe payment integration, review system, and comprehensive admin management capabilities.
+This E-Commerce API project serves as the backend for an e-commerce platform. The API is built using Node.js and Express, providing a robust and scalable solution for managing product data, user authentication, and order processing. MongoDB is used as the database, and Mongoose is utilized for object data modeling (ODM). The project is structured to handle various e-commerce functionalities, including product listing, user authentication (registration, login, and logout), and managing customer orders. The API also includes security enhancements like rate limiting and sanitization to prevent common vulnerabilities.
 
 ## 🔗 Backend API - Fully Developed & Ready to Use
 
 The backend API is **completely developed** and operational with all e-commerce functionalities implemented. You can:
 
-- **Explore & Test the API**: Visit my interactive Swagger UI documentation at [https://e-commerce-backend-s1h1.onrender.com/api-docs](https://e-commerce-backend-s1h1.onrender.com/api-docs)
+- **Live API**: Access the API at [http://54.199.131.100:3000](http://54.199.131.100:3000)
+- **Explore & Test the API**: Visit my interactive Swagger UI documentation at [https://e-commerce-backend-s1h1.onrender.com/api-docs](https://e-commerce-backend-s1h1.onrender.com/api-docs) (Note: Currently using Render documentation URL while AWS Swagger integration is being configured)
 - **Try All Endpoints**: Use the Swagger interface to test all available endpoints with the test accounts provided below
 
-## 🌐 Live Demo (Frontend Under Development)
+## Deployment
 
-Visit the live site: https://e-commerce-tau-azure.vercel.app
+This API is deployed using Docker containers with AWS ECR and ECS:
 
-> **Development Status:**
->
-> - **Backend**: ✅ **FULLY DEVELOPED** and operational with complete API functionality
-> - **Frontend**: 🚧 Currently in active development. Only the features shown in the screenshots below are implemented.
+1. Docker image is built and pushed to AWS ECR (Elastic Container Registry)
+2. Application is deployed as a service on AWS ECS (Elastic Container Service)
+3. The service runs on a Fargate cluster for serverless container management
+4. Currently accessible at: [http://54.199.131.100:3000](http://54.199.131.100:3000)
 
 ## 🚀 Tech Stack
-
-### Frontend
-
-- **Framework**: Next.js
-- **Styling**: TailwindCSS
-- **State Management**: React Context
-- **Deployment**: Vercel
-
-### Backend
 
 - **Runtime**: Node.js
 - **Framework**: Express.js
@@ -35,66 +27,18 @@ Visit the live site: https://e-commerce-tau-azure.vercel.app
 - **Authentication**: JWT
 - **Image Storage**: Cloudinary
 - **Payment Processing**: Stripe API
-- **Deployment**: Render
+- **Containerization**: Docker
+- **Deployment**: AWS ECR, AWS ECS
+
+## System Architecture
+
+![System Architecture](/public/E-Commerce%20API%20System%20Architecture.png)
+
+## Database Schema
+
+![DB Schema Diagram](/public/E-Commerce%20API%20DB%20Schema%20Diagram.png)
 
 ## ✨ Key Features
-
-### User Features
-
-- User authentication (login/register)
-- Browse products by gender categories
-- Filter products by category, rating, and featured status
-- Detailed product pages with size/color selection
-- Shopping cart management
-- Secure checkout with Stripe
-- Product reviews and ratings
-- Order history tracking
-
-### Admin Features
-
-- Product management (CRUD operations)
-- Order management
-- User management
-- Image upload and management via Cloudinary
-
-## 📸 Screenshots
-
-> **Note**: The following screenshots represent the currently implemented frontend features. While the frontend is still under active development, the backend API fully supports all e-commerce functionalities including user authentication, product management, order processing, reviews CRUD operations and more.
-
-### Home Page
-
-Gender-based product categorization
-![Home Page](/frontend/public/readme/E-Commerce%20home%20page.png)
-
-### Login Page
-
-Secure user authentication
-![Login Page](/frontend/public/readme/E-Commerce%20login%20page.png.png)
-
-### Products Page
-
-Advanced filtering by Category, Rating, and Featured status
-![Products Page](/frontend/public/readme/E-Commerce%20products%20page.png)
-
-### Product Details
-
-Detailed product information with reviews and size/color selection
-![Product Page](/frontend/public/readme/E-Commerce%20product%20page.png)
-
-### Shopping Cart
-
-Cart management with quantity adjustment
-![Cart Page](/frontend/public/readme/E-Commerce%20cart%20page.png)
-
-## 🏗 System Architecture
-
-![System Architecture](/frontend/public/readme/E-Commerce%20API%20System%20Architecture.png)
-
-## 📊 Database Schema
-
-![DB Schema Diagram](/frontend/public/readme/E-Commerce%20API%20DB%20Schema%20Diagram.png)
-
-## 🛠 API Features
 
 ### Authentication
 
@@ -139,32 +83,24 @@ Cart management with quantity adjustment
 - npm
 - MongoDB
 
-### Backend Setup
+### Setup
 
-1. Clone the repository
+1. Install Node.js, npm, nodemon.
+2. Clone this project to your local repository
+3. Change directory to project folder
+4. Install npm packages `npm install`
+5. Create a .env file based on the instruction of .env.example
+6. Run project `npm run start`
+7. You will see this message when the project has been successfully executed
 
-   ```bash
-   git clone [repository-url]
+   ```
+   Server is listening on port 3000
    ```
 
-2. Navigate to backend directory
+### Docker Development
 
-   ```bash
-   cd backend
-   ```
-
-3. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-4. Create .env file (based on .env.example)
-
-5. Start the server
-   ```bash
-   npm run start
-   ```
+1. Build the Docker image: `docker build -t e-commerce-api .`
+2. Run the container: `docker run -p 3000:3000 e-commerce-api`
 
 ## 🔑 Test Accounts
 
