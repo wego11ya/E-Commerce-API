@@ -4,11 +4,14 @@ This E-Commerce API project serves as the backend for an e-commerce platform. Th
 
 ## 🔗 Backend API - Fully Developed & Ready to Use
 
-The backend API is **completely developed** and operational with all e-commerce functionalities implemented. You can:
+This backend API is **fully developed** with all e-commerce functionalities implemented. It was originally deployed using **AWS ECR and AWS ECS**. However, due to cost considerations, the AWS deployment is **currently inactive**.
 
-- **Live API**: Access the API at [http://54.199.131.100:3000](http://54.199.131.100:3000)
-- **Explore & Test the API**: Visit my interactive Swagger UI documentation at [https://e-commerce-backend-s1h1.onrender.com/api-docs](https://e-commerce-backend-s1h1.onrender.com/api-docs) (Note: Currently using Render documentation URL while AWS Swagger integration is being configured)
-- **Try All Endpoints**: Use the Swagger interface to test all available endpoints with the test accounts provided below
+For demonstration and testing purposes, the API is temporarily hosted on **Render's free tier**. Please note that the free tier service may spin down after periods of inactivity, and the **first request might take around 30 seconds** to wake the service up.
+
+You can:
+
+- **Explore & Test the API**: Visit the interactive Swagger UI documentation at [https://e-commerce-backend-s1h1.onrender.com/api-docs](https://e-commerce-backend-s1h1.onrender.com/api-docs)
+- **Try All Endpoints**: Use the Swagger interface with the test accounts provided below to test all available endpoints.
 
 ## Deployment
 
